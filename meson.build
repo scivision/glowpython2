@@ -22,9 +22,13 @@ fs = import('fs')
 
 fc = meson.get_compiler('fortran')
 
-fortran_args = ['-cpp', '-ffast-math', '-std=legacy']
+fortran_args = ['-cpp', '-ffast-math']
 if host_machine.system() == 'windows'
   fortran_args += ['-D_WIN32'] # Ensure _WIN32 is defined for Windows builds to avoid missing symbol errors in MinGW runtimes.
+endif
+
+if fc.get_id() == 'gcc'
+  fortran_args += ['-std=legacy']
 endif
 
 # On Windows with MinGW gfortran, extension modules can fail to import if
