@@ -5,8 +5,8 @@
 project('glowpython2', 'c',
   version: run_command(
     [
-      find_program('python3', 'python', required: true), 
-      '-m', 
+      find_program('python3', 'python', required: true),
+      '-m',
       'setuptools_scm',
     ],
     check: true
@@ -22,7 +22,7 @@ fs = import('fs')
 
 fc = meson.get_compiler('fortran')
 
-fortran_args = ['-cpp', '-march=native', '-ffast-math', '-std=legacy']
+fortran_args = ['-cpp', '-ffast-math', '-std=legacy']
 if host_machine.system() == 'windows'
   fortran_args += ['-D_WIN32'] # Ensure _WIN32 is defined for Windows builds to avoid missing symbol errors in MinGW runtimes.
 endif
@@ -179,23 +179,23 @@ install_subdir(
 
 # GLOW Fortran sources
 glow_fort_srcs = [
-  'src/GLOW/cglow.f90', 
-  'src/GLOW/glow.f90', 
-  'src/GLOW/bands.f90', 
+  'src/GLOW/cglow.f90',
+  'src/GLOW/glow.f90',
+  'src/GLOW/bands.f90',
   'src/GLOW/conduct.f90',
   'src/GLOW/pyconduct.f90',
-  'src/GLOW/egrid.f90', 
-  'src/GLOW/ephoto_init.f90', 
-  'src/GLOW/ephoto.f90', 
-  'src/GLOW/etrans.f90', 
+  'src/GLOW/egrid.f90',
+  'src/GLOW/ephoto_init.f90',
+  'src/GLOW/ephoto.f90',
+  'src/GLOW/etrans.f90',
   'src/GLOW/exsect.f90',
   'src/GLOW/gchem.f90',
   'src/GLOW/gchem_modglow.f90',
-  'src/GLOW/maxt.f90', 
-  'src/GLOW/qback.f90', 
+  'src/GLOW/maxt.f90',
+  'src/GLOW/qback.f90',
   'src/GLOW/rcolum.f90',
-  'src/GLOW/solzen.f90', 
-  'src/GLOW/ssflux_init.f90', 
+  'src/GLOW/solzen.f90',
+  'src/GLOW/ssflux_init.f90',
   'src/GLOW/ssflux.f90',
   'src/GLOW/vquart.f90',
 ]
