@@ -27,7 +27,7 @@ module cglow
 !    >    BMAG(JMAX) [Magnetic field in TESLA not GAUSS, multiply FIELDM
 !         RESULT BY 1.0e-4]
 !    >    PHITOP(NBINS), EFLUX(NF), EZERO(NF),
-!    >    SZA, DIP(JMAX) [Radians], 
+!    >    SZA, DIP(JMAX) [Radians],
 !    >    EFRAC, IERR,
 !    >    ZMAJ(NMAJ,JMAX), ZCOL(NMAJ,JMAX),
 !    >    WAVE1(LMAX), WAVE2(LMAX), SFLUX(LMAX),
@@ -58,9 +58,9 @@ module cglow
 
   integer :: jmax=0              ! number of vertical levels
   integer :: nbins=0             ! number of energetic electron energy bins
-  
+
   !! Array dimensions, non-configurable:
-  
+
   integer,parameter :: lmax=123  ! number of wavelength intervals for solar flux
   integer,parameter :: nmaj=3    ! number of major species
   integer,parameter :: nst=6     ! number of states produced by photoionization/dissociation
@@ -103,7 +103,7 @@ module cglow
   integer,allocatable,dimension(:)  :: iimaxx                         ! (nbins)
   real,allocatable,dimension(:,:) :: &                                ! (nei,nmaj)
     ww,ao,omeg,anu,bb,auto,thi,ak,aj,ts,ta,tb,gams,gamb
-  real,allocatable,dimension(:)     :: acoeff, bcoeff                 ! (nr) 
+  real,allocatable,dimension(:)     :: acoeff, bcoeff                 ! (nr)
 
   real(wp), allocatable, dimension(:,:) :: production, loss  ! gchem.f90
 
@@ -237,7 +237,7 @@ module cglow
       sflux(lmax), &
       sf_rflux(lmax), &
       sf_scale1(lmax), &
-      sf_scale2(lmax), &
+      sf_scale2(lmax) &
     )
 
 
@@ -252,7 +252,7 @@ module cglow
     allocate(&
       epsil1(nst,nmaj,lmax), &
       epsil2(nst,nmaj,lmax), &
-      ephoto_prob(nst,nmaj,lmax), &
+      ephoto_prob(nst,nmaj,lmax) &
     )
 
     epsil1(:,:,:) = 0.
@@ -263,7 +263,7 @@ module cglow
     if (.not.allocated(sigion)) then
     allocate(&
       sigion(nmaj,lmax), &
-      sigabs(nmaj,lmax), &
+      sigabs(nmaj,lmax) &
     )
 
     sigion(:,:) = 0.
@@ -302,7 +302,7 @@ module cglow
        tir  (jmax), &
        ecalc(jmax), &
        bmag (jmax), &
-       dip  (jmax), &
+       dip  (jmax) &
     )
 
     allocate(zxden(nex,jmax), &
@@ -332,17 +332,17 @@ module cglow
     allocate(sigs(nmaj,nbins), &
         pe  (nmaj,nbins), &
         pin (nmaj,nbins))
-      
+
     allocate(phono(nst,jmax))
     allocate(photoi(nst,nmaj,jmax), &
              photod(nst,nmaj,jmax))
- 
+
      allocate(sigex(nei,nmaj,nbins), &
         sigix(nei,nmaj,nbins))
- 
+
      allocate(siga(nei,nbins,nbins), &
         sec (nei,nbins,nbins))
- 
+
      allocate(iimaxx(nbins))
 
     !  call cglow_dynamic_zero
@@ -456,8 +456,8 @@ module cglow
     call ssflux_init(iscale)   ! initialize ssflux
     call ephoto_init()         ! initialize ephoto
   end subroutine sflux_init
-  
-  
+
+
   subroutine egrid_init
       ! Depends on nbins
        call egrid(ener, edel, nbins)  ! initialize energy grid
